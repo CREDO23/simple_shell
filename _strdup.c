@@ -9,10 +9,11 @@
 
 char *_strdup(char *s)
 {
-size_t len;
+int len = 0;
 char * dst;
-if (!s)
+if (s == NULL)
 {
+
 return (NULL);
 }
 len = strlen (s) + 1;
