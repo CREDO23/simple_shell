@@ -21,6 +21,5 @@ dst = (char *)malloc (len);
 if (dst!= NULL)
 memcpy(dst, s, len);
 return (dst);
-free(dst);
 }
 
