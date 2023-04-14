@@ -21,6 +21,7 @@ if (*s == '-')
 sign *= -1;
 
 else if (*s >= '0' && *s <= '9')
+flag = 1;
 res = (res * 10) + (*s - '0');
 
 else if (res > 0)
