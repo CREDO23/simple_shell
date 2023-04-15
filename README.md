@@ -54,5 +54,5 @@ exit - Exit the shell, with an optional exit status.
 env - Print the environment.
 setenv - Set an environment variable and value. If the variable exists, the value will be updated.
 unsetenv - Remove an environment variable.
-cd [dir]-Change the directory.
+cd -Change the directory.
 help [built-in]-Read documentation for a built-in.
