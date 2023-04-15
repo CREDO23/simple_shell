@@ -45,7 +45,7 @@ Handle variables replacement.
 Handle the $? variable.
 Handle the $$ variable.
 Handle comments (#).
-
+Contains one command per line - for File as input
 
 Included Built-Ins
 
@@ -56,3 +56,5 @@ setenv - Set an environment variable and value. If the variable exists, the valu
 unsetenv - Remove an environment variable.
 cd -Change the directory.
 help [built-in]-Read documentation for a built-in.
+
+
