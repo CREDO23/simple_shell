@@ -3,7 +3,7 @@
 /**
 *_atoi - Takes a string as argument and returns its value of type int
 *@s: The number in string form
-*Return: an integer
+*Return: an integer value
 */
 
 int _atoi(char *s)
