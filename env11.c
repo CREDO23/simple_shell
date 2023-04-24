@@ -37,7 +37,6 @@ char *_getenv_v(const char *name, char **_envron)
 
 	p_env = NULL;
 	m = 0;
-	
 	for (i = 0; _envron[i]; i++)
 	{
 		m = cmp_env_n(_envron[i], name);

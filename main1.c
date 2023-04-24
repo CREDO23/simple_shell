@@ -47,7 +47,7 @@ void init_data(data_t *data, char **av)
 	}
 
 	data->_environ[i] = NULL;
-	data->pid = aux_itoa(getpid());
+	data->pid = _itoa(getpid());
 }
 
 /**

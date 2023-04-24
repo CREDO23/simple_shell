@@ -13,19 +13,19 @@ int _error(data_t *data, int erval)
 	switch (erval)
 	{
 	case -1:
-		err = error_env(data);
+		err = e_env(data);
 		break;
 	case 2:
 		if (_strcmp("exit", data->args[0]) == 0)
-			err = error_exit_shell(data);
+			err = exit_sh_err(data);
 		else if (_strcmp("cd", data->args[0]) == 0)
-			err = error_get_cd(data);
+			err = get_cd_err(data);
 		break;
 	case 126:
-		err = error_path_126(data);
+		err = e_path_126(data);
 		break;
 	case 127:
-		err = error_not_found(data);
+		err = not_found_err(data);
 		break;
 	}
 

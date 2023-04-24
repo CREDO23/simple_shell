@@ -8,7 +8,7 @@
  * @data: data structure
  * Return: Nothing
  */
-void is_env(r_var_t **head, char *str, data_t *data)
+void is_env(rvar_t **head, char *str, data_t *data)
 {
 	char **env;
 	int val, j, r, ch;
@@ -21,7 +21,7 @@ void is_env(r_var_t **head, char *str, data_t *data)
 			if (env[r][ch] == '=')
 			{
 				val = _strlen(env[r] + ch + 1);
-				add_rvar_node(head, j, env[r] + ch + 1, val);
+				_add_rvar(head, j, env[r] + ch + 1, val);
 				return;
 			}
 
@@ -38,7 +38,7 @@ void is_env(r_var_t **head, char *str, data_t *data)
 			break;
 	}
 
-	add_rvar_node(head, j, NULL, 0);
+	_add_rvar(head, j, NULL, 0);
 }
 
 /**
@@ -50,7 +50,7 @@ void is_env(r_var_t **head, char *str, data_t *data)
  * @data: data struct
  * Return: Nothing
  */
-int check_dol(r_var_t **head, char *string, char *statut, data_t *data)
+int check_dol(rvar_t **head, char *string, char *statut, data_t *data)
 {
 	int i, ls, lp;
 
@@ -62,19 +62,19 @@ int check_dol(r_var_t **head, char *string, char *statut, data_t *data)
 		if (string[i] == '$')
 		{
 			if (string[i + 1] == '?')
-				add_rvar_node(head, 2, statut, ls), i++;
+				_add_rvar(head, 2, statut, ls), i++;
 			else if (string[i + 1] == '$')
-				add_rvar_node(head, 2, data->pid, lp), i++;
+				_add_rvar(head, 2, data->pid, lp), i++;
 			else if (string[i + 1] == '\n')
-				add_rvar_node(head, 0, NULL, 0);
+				_add_rvar(head, 0, NULL, 0);
 			else if (string[i + 1] == '\0')
-				add_rvar_node(head, 0, NULL, 0);
+				_add_rvar(head, 0, NULL, 0);
 			else if (string[i + 1] == ' ')
-				add_rvar_node(head, 0, NULL, 0);
+				_add_rvar(head, 0, NULL, 0);
 			else if (string[i + 1] == '\t')
-				add_rvar_node(head, 0, NULL, 0);
+				_add_rvar(head, 0, NULL, 0);
 			else if (string[i + 1] == ';')
-				add_rvar_node(head, 0, NULL, 0);
+				_add_rvar(head, 0, NULL, 0);
 			else
 				is_env(head, string + i, data);
 		}
@@ -92,9 +92,9 @@ int check_dol(r_var_t **head, char *string, char *statut, data_t *data)
  * @new_len: The new length
  * Return: replaced string
  */
-char *repl_string(r_var_t **head, char *string, char *new_string, int new_len)
+char *repl_string(rvar_t **head, char *string, char *new_string, int new_len)
 {
-	r_var_t *index;
+	rvar_t *index;
 	int i, j, k;
 
 	index = *head;
@@ -136,7 +136,7 @@ char *repl_string(r_var_t **head, char *string, char *new_string, int new_len)
 }
 
 /**
- * repl_vars - calls functions to replace string into vars
+ * rep_var - calls functions to replace string into vars
  *
  * @string: The input string
  * @data: The data struct
@@ -144,11 +144,11 @@ char *repl_string(r_var_t **head, char *string, char *new_string, int new_len)
  */
 char *rep_var(char *string, data_t *data)
 {
-	r_var_t *head, *index;
+	rvar_t *head, *index;
 	char *status, *new_string;
 	int olen, nlen;
 
-	status = aux_itoa(data->status);
+	status = _itoa(data->status);
 	head = NULL;
 
 	olen = check_dol(&head, string, status, data);
@@ -177,7 +177,7 @@ char *rep_var(char *string, data_t *data)
 
 	free(string);
 	free(status);
-	free_rvar_list(&head);
+	free_rvar_l(&head);
 
 	return (new_string);
 }

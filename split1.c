@@ -51,7 +51,7 @@ char *swap_op(char *string, int type)
  * @str: The input string
  * Return: Nothing
  */
-void add_nodes(sep_list_t **head_se, line_list_t **head_co, char *str)
+void add_nodes(sep_l_t **head_se, line_list_t **head_co, char *str)
 {
 	int i;
 	char *line;
@@ -61,11 +61,11 @@ void add_nodes(sep_list_t **head_se, line_list_t **head_co, char *str)
 	for (i = 0; str[i]; i++)
 	{
 		if (str[i] == ';')
-			add_sep_node_end(head_se, str[i]);
+			_add_sep(head_se, str[i]);
 
 		if (str[i] == '|' || str[i] == '&')
 		{
-			add_sep_node_end(head_se, str[i]);
+			_add_sep(head_se, str[i]);
 			i++;
 		}
 	}
@@ -73,7 +73,7 @@ void add_nodes(sep_list_t **head_se, line_list_t **head_co, char *str)
 	line = _strtok(str, ";|&");
 	do {
 		line = swap_op(line, 1);
-		add_line_node_end(head_co, line);
+		_add_com(head_co, line);
 		line = _strtok(NULL, ";|&");
 	} while (line != NULL);
 
@@ -87,10 +87,10 @@ void add_nodes(sep_list_t **head_se, line_list_t **head_co, char *str)
  * @data: The data struct
  * Return: Nothing
  */
-void _next(sep_list_t **list_se, line_list_t **list_co, data_t *data)
+void _next(sep_l_t **list_se, line_list_t **list_co, data_t *data)
 {
 	int loop_sep;
-	sep_list_t *ls_se;
+	sep_l_t *ls_se;
 	line_list_t *ls_co;
 
 	loop_sep = 1;
@@ -131,7 +131,7 @@ void _next(sep_list_t **list_se, line_list_t **list_co, data_t *data)
 int split_commands(data_t *data, char *string)
 {
 
-	sep_list_t *head_se, *list_se;
+	sep_l_t *head_se, *list_se;
 	line_list_t *head_co, *list_co;
 	int loop;
 
@@ -159,8 +159,8 @@ int split_commands(data_t *data, char *string)
 			list_co = list_co->next;
 	}
 
-	free_sep_list(&head_se);
-	free_line_list(&head_co);
+	free_sep_l(&head_se);
+	free_com_l(&head_co);
 
 	if (loop == 0)
 		return (0);
@@ -196,7 +196,7 @@ char **tokenizer(char *string)
 		if (i == size)
 		{
 			size += TOKEN_BUFSIZE;
-			tokens = _reallocdp(tokens, i, sizeof(char *) * size);
+			tokens = _rallocdp(tokens, i, sizeof(char *) * size);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);

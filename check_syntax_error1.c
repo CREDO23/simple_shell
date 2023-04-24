@@ -122,7 +122,7 @@ void print_sy_err(data_t *data, char *string, int index, int merr)
 
 	m2 = ": Syntax err: \"";
 	m3 = "\" unexpected\n";
-	counter = aux_itoa(data->counter);
+	counter = _itoa(data->counter);
 	length = _strlen(data->av[0]) + _strlen(counter);
 	length += _strlen(m) + _strlen(m2) + _strlen(m3) + 2;
 
