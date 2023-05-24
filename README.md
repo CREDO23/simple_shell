@@ -57,5 +57,5 @@ Our simple_shell supports the following builtin commands.
 
 
 ## Authors
-+ Bakera Thierry
-+ Vallentine Nyabuto
++ Bakera Thierry (bakerathierry@gmail.com)
++ Valentine Nyabuto
